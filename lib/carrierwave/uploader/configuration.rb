@@ -38,7 +38,12 @@ module CarrierWave
         add_config :ensure_multipart_form
         add_config :delete_tmp_file_after_storage
         add_config :remove_previously_stored_files_after_update
-
+        add_config :ftp_host
+        add_config :ftp_http_host
+        add_config :ftp_http_path_prefix
+        add_config :ftp_login
+        add_config :ftp_password
+        
         # fog
         add_config :fog_attributes
         add_config :fog_credentials
@@ -123,6 +128,7 @@ module CarrierWave
             config.permissions = 0644
             config.storage_engines = {
               :file => "CarrierWave::Storage::File",
+              :ftp => "CarrierWave::Storage::Ftp",              
               :fog => "CarrierWave::Storage::Fog",
               :s3 => "CarrierWave::Storage::S3",
               :grid_fs => "CarrierWave::Storage::GridFS",

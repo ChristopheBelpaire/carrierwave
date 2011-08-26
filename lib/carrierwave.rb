@@ -43,6 +43,7 @@ module CarrierWave
   module Storage
     autoload :Abstract, 'carrierwave/storage/abstract'
     autoload :File, 'carrierwave/storage/file'
+    autoload :Ftp, 'carrierwave/storage/ftp'  
     autoload :Fog, 'carrierwave/storage/fog'
     autoload :S3, 'carrierwave/storage/s3'
     autoload :GridFS, 'carrierwave/storage/grid_fs'
