@@ -13,9 +13,11 @@ describe CarrierWave::Storage::Ftp do
   before do
     CarrierWave.configure do |config|
       config.reset_config
-      config.ftp_host  = 'ftp.filmswap.in'
-      config.ftp_login = 'paulhenr'
-      config.ftp_password = 'Mvy6TP9rAbmr'
+      config.ftp_host  = FTP_HOST
+      config.ftp_login = FTP_LOGIN
+      config.ftp_password = FTP_PASSWORD
+      config.ftp_http_host  = FTP_HTTP_HOST
+      
     end
     
     @uploader = FtpSpecUploader.new
@@ -26,7 +28,6 @@ describe CarrierWave::Storage::Ftp do
   
   it 'store' do
       @storage.store!(@file)
-      f = @storage.retrieve!(@file.filename)
       puts f.url
   end
   

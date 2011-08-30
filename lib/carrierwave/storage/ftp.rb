@@ -12,8 +12,8 @@ module CarrierWave
         end
         
         def url
-          http_path = @uploader.store_path.sub @uploader.ftp_http_path_prefix,''
-          return "#{@uploader.ftp_http_host}/#{http_path}#{::File.basename(@path)}"
+          http_path = (@uploader.store_path.sub @uploader.ftp_http_path_prefix,'' if @uploader.ftp_http_path_prefix) || @uploader.store_path
+          return "#{@uploader.ftp_http_host}#{::File.dirname(http_path)}/#{::File.basename(@path)}"
         end  
       end  
       
@@ -21,8 +21,7 @@ module CarrierWave
       def store!(file)
         path = ::File.expand_path(uploader.store_path, uploader.root)
         mkpath("/#{::File.dirname(uploader.store_path)}")        
-        
-        connection.putbinaryfile(file.path, uploader.store_path)
+        connection.putbinaryfile(file.path, "#{::File.dirname(uploader.store_path)}/#{file.filename}")
       end
 
       def retrieve!(identifier)
